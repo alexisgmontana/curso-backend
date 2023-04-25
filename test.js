@@ -4,7 +4,7 @@ class ProductManager {
   }
 
   #generateId() {
-    maxId = 0;
+    let maxId = 0;
     for (let x = 0; x < this.products.length; x++) {
       let pr = this.products[x];
       if (pr.id > maxId) {
@@ -37,3 +37,9 @@ class ProductManager {
     }
   }
 }
+
+const product = new ProductManager();
+
+product.addProduct("cepillo", "es bueno", 500, "sin imagen", 1823, 9);
+
+console.log(product.products);
