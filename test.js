@@ -60,6 +60,7 @@ class ProductManager {
   0123,
   9
 );
+
 product.addProduct(
   "Mi 2 producto",
   "mala calidad",
@@ -68,6 +69,7 @@ product.addProduct(
   0124,
   20
 );
+
 product.addProduct(
   "Mi 3 producto",
   "muy buena calidad",
