@@ -15,9 +15,27 @@ class ProductManager {
   }
 
   addProduct(title, description, price, thumbnail, code, stock) {
-    let newProduct = { title, description, thumbnail, price, code, stock };
+    let newProduct = { title, description, price, thumbnail, code, stock };
     newProduct = { ...newProduct, id: this.#generateId() };
-    this.products.push(newProduct);
+    let validation = Object.values(newProduct).some(
+      (values) => values === null || values === "" || values === undefined
+    );
+
+    let validationCode = false;
+    for (let i = 0; i < this.products.length; i++) {
+      const element = this.products[i];
+      if (element.code == newProduct.code) {
+        validationCode = true;
+      }
+    }
+
+    if (validation) {
+      console.log("¡Error!, datos inválidos");
+    } else if (validationCode) {
+      console.log("¡Error!, código repetido");
+    } else {
+      this.products.push(newProduct);
+    }
   }
 
   getProducts() {
@@ -26,20 +44,39 @@ class ProductManager {
   }
 
   getProductById(id) {
-    const productFound = this.products.find((prod) => {
-      prod.id === id;
-    });
-    if (productFound) {
-      return productFound;
-    } else {
-      console.log("Not found!");
-      return undefined;
-    }
+    const productFound = this.products.find((prod) => prod.id == id);
+    console.log(productFound || "Producto no encontrado");
+    return productFound || "Producto no encontrado";
   }
 }
 
-const product = new ProductManager();
+// const product = new ProductManager();
 
-product.addProduct("cepillo", "es bueno", 500, "sin imagen", 1823, 9);
+/* product.addProduct(
+  "Mi 1 producto",
+  "buena calidad",
+  500,
+  "imágen.jpg",
+  0123,
+  9
+);
+product.addProduct(
+  "Mi 2 producto",
+  "mala calidad",
+  200,
+  "imágen2.jpg",
+  0124,
+  20
+);
+product.addProduct(
+  "Mi 3 producto",
+  "muy buena calidad",
+  1100,
+  "imágen3.jpg",
+  0125,
+  3
+); */
 
-console.log(product.products);
+// product.getProducts();
+
+// product.getProductById(1);
